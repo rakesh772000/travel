@@ -1,9 +1,11 @@
 package com.travel.place_service.dto;
 
-import lombok.*;
+import lombok.Data;
+
+import java.io.Serializable;
 
 @Data
-public class PlaceResponse {
+public class PlaceResponse implements Serializable {
     private Long id;
     private String name;
     private String city;
