@@ -37,4 +37,13 @@ public class PlaceService {
               .map(mapper::toResponse)
               .toList();
     }
+
+    @Cacheable(value = "places", key = "#name")
+    public List<PlaceResponse> getByPlaceName(String name) {
+        List<Place> places = placeRepository.findByNameContainingIgnoreCase(name);
+
+        return places.stream()
+                .map(mapper::toResponse)
+                .toList();
+    }
 }

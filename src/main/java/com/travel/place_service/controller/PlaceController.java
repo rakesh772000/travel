@@ -2,6 +2,7 @@ package com.travel.place_service.controller;
 
 import com.travel.place_service.dto.PlaceRequest;
 import com.travel.place_service.dto.PlaceResponse;
+import com.travel.place_service.entity.Place;
 import com.travel.place_service.service.PlaceService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,18 @@ public class PlaceController {
     // GET ALL
     @GetMapping
     public ResponseEntity<List<PlaceResponse>> getAll() {
+        return ResponseEntity.ok(service.getAllPlaces());
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<PlaceResponse>> getPlaces(
+            @RequestParam(required = false) String place) {
+
+        if (place != null) {
+            return ResponseEntity.ok(service.getByPlaceName(place));
+        }
+
         return ResponseEntity.ok(service.getAllPlaces());
     }
 
